@@ -222,9 +222,8 @@ export default {
                 return error
             })
         
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
       } else {
-        axios.post('http://localhost:3000/api/categoria/update', {
+        axios.post('http://localhost:3000/api/categoria/add', {
             "estado": 1,
             "nombre": this.editedItem.nombre,
             "descripcion": this.editedItem.descripcion,
