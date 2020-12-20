@@ -56,6 +56,10 @@ export default {
             }
         }
     },
+    
+    beforeCreate(){
+        this.$store.dispatch('autoLogin')? this.$router.push({path: '/segura'}) : false;
+  },
     methods:{
         loginUser(){
             axios.post('http://localhost:3000/api/usuario/login', this.login)
@@ -63,7 +67,8 @@ export default {
                 return response.data;
             })
             .then(data =>{
-                this.$router.push('/segura');
+                this.$store.dispatch('guardarToken', data.tokenReturn)
+                this.$router.push({name: 'Segura'});
                 swal ("Éxito!!",'Login correcto, beinvenido!',"success");
                 console.log(data);
             })

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -55,17 +56,6 @@ const routes = [
         }
       },
       {
-        path: 'usuario',
-        name: 'Usuario',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "usuario" */ '../views/Usuario.vue'),
-        meta:{
-          auth: true
-        }
-      },
-      {
         path: 'articulo',
         name: 'Articulo',
         // route level code-splitting
@@ -73,9 +63,22 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "articulo" */ '../views/Articulo.vue'),
         meta:{
-          auth: true
+          auth: true,
         }
-      }
+      },
+      {
+        path: 'usuario',
+        name: 'Usuario',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "usuario" */ '../views/Usuario.vue'),
+        meta:{
+          auth: true,
+          administrador: true,
+          vendedor: true
+        }
+      },
     ]
   },
   
@@ -85,6 +88,20 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next)=>{
+  if(to.matched.some(record => record.meta.public)){
+    next();
+  }else if(to.matched.some(record => record.meta.auth)){
+    if(store.state.user){
+      next();
+    }else{
+      next({name: 'Login'});
+    }
+  }else{
+    next();
+  }
 })
 
 export default router

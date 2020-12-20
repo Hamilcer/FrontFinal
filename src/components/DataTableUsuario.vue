@@ -45,14 +45,14 @@
                       <v-col cols="12">
                         <v-text-field
                           v-model="editedItem.nombre"
-                          label="Correo"
+                          label="Nombre"
                         ></v-text-field>
                       </v-col>
 
                       <v-col cols="12">
                         <v-text-field
                           v-model="editedItem.email"
-                          label="Nombre"
+                          label="Correo"
                         ></v-text-field>
                       </v-col>
 
@@ -64,6 +64,10 @@
                           label="Estado"
                         ></v-text-field>
                       </v-col>
+            
+ 
+
+
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -80,7 +84,7 @@
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
                 <v-card-title class="headline"
-                  >Are you sure you want to delete this item?</v-card-title
+                  >Are you sure you want to change this this state?</v-card-title
                 >
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -111,7 +115,7 @@
       </v-data-table>
     </v-app>
     <pre>
-        {{ $data.categorias }}
+        {{ $data.usuarios }}
     </pre>
   </div>
 </template>
@@ -173,8 +177,11 @@ export default {
 
   methods: {
     list() {
-      axios
-        .get("http://localhost:3000/api/usuario/list")
+      axios.get("http://localhost:3000/api/usuario/list",{
+          headers: {
+            token: this.$store.state.token
+          }
+        })
         .then((response) => {
           this.usuarios = response.data;
           this.cargando = false;
@@ -199,7 +206,7 @@ export default {
     deleteItemConfirm() {
       if (this.editedItem.estado === 1) {
         axios
-          .put("http://localhost:3000/api/categoria/deactivate", {
+          .put("http://localhost:3000/api/usuario/deactivate", {
             id: this.editedItem.id,
           })
           .then((response) => {
@@ -210,7 +217,7 @@ export default {
           });
       } else {
         axios
-          .put("http://localhost:3000/api/categoria/activate", {
+          .put("http://localhost:3000/api/usuario/activate", {
             id: this.editedItem.id,
           })
           .then((response) => {
@@ -242,10 +249,10 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         axios
-          .put("http://localhost:3000/api/categoria/update", {
+          .put("http://localhost:3000/api/usuario/update", {
             id: this.editedItem.id,
             nombre: this.editedItem.nombre,
-            descripcion: this.editedItem.descripcion,
+            email: this.editedItem.email,
           })
           .then((response) => {
             this.list();
@@ -255,10 +262,11 @@ export default {
           });
       } else {
         axios
-          .post("http://localhost:3000/api/categoria/add", {
+          .post("http://localhost:3000/api/usuario/add", {
             estado: 1,
             nombre: this.editedItem.nombre,
-            descripcion: this.editedItem.descripcion,
+            email: this.editedItem.email,
+            // password: this.editItem.password,
           })
           .then((response) => {
             this.list();

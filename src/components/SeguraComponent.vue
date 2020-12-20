@@ -1,27 +1,20 @@
 <template>
   <v-app id="inspire">
-    <v-system-bar app>
-      <v-spacer></v-spacer>
-
-      <v-icon>mdi-square</v-icon>
-
-      <v-icon>mdi-circle</v-icon>
-
-      <v-icon>mdi-triangle</v-icon>
-    </v-system-bar>
-
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Application</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon class="mr-5" @click="salir()">
+        <v-icon>mdi-logout</v-icon>
+        <span>salir</span>
+      </v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-card class="mx-auto" width="300">
         <v-list>
-          <v-list-item
-          :to="{name: 'Home'}"
-          >
+          <v-list-item :to="{ name: 'Home' }">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
@@ -29,16 +22,17 @@
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
 
-          <v-list-group  prepend-icon="mdi-account-circle">
+          <v-list-group prepend-icon="mdi-account-circle">
             <template v-slot:activator>
               <v-list-item-content>
                 <v-list-item-title>Admin</v-list-item-title>
               </v-list-item-content>
             </template>
 
-            <v-list-item v-for="([title, icon, ruta], i) in admins" 
-            :key="i" 
-            :to="{name: ruta}"
+            <v-list-item
+              v-for="([title, icon, ruta], i) in admins"
+              :key="i"
+              :to="{ name: ruta }"
             >
               <v-list-item-title v-text="title"></v-list-item-title>
 
@@ -48,17 +42,20 @@
             </v-list-item>
           </v-list-group>
 
-          <v-list-group  prepend-icon="mdi-account-circle">
+<!--            VALIDAR SEGUN EL ROL          -->
+          <v-list-group v-if="this.$store.state.user.rol === 'Vendedor'"
+          prepend-icon="mdi-account-circle">
             <template v-slot:activator>
               <v-list-item-content>
                 <v-list-item-title>Actions</v-list-item-title>
               </v-list-item-content>
             </template>
 
-            <v-list-item v-for="([title, icon, ruta], i) in cruds" 
-            :key="i" 
-            link
-            :to="{name: ruta}"
+            <v-list-item
+              v-for="([title, icon, ruta], i) in cruds"
+              :key="i"
+              link
+              :to="{ name: ruta }"
             >
               <v-list-item-title v-text="title"></v-list-item-title>
 
@@ -80,14 +77,10 @@
 </template>
 
 <script>
-
-
 export default {
   name: "SeguraComponent",
 
-  components: {
-    
-  },
+  components: {},
 
   data: () => ({
     //
@@ -96,10 +89,15 @@ export default {
       ["Categorias", "mdi-account-multiple-outline", "Categoria"],
       ["Articulos", "mdi-cog-outline", "Articulo"],
     ],
-    cruds: [
-      ["Usuarios", "mdi-plus-outline", "Usuario"],
-
-    ],
+    cruds: [["Usuarios", "mdi-plus-outline", "Usuario"]],
   }),
+  created() {
+    this.$store.dispatch("autoLogin");
+  },
+  methods: {
+    salir() {
+      this.$store.dispatch("salir");
+    },
+  },
 };
 </script>

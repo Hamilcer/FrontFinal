@@ -217,7 +217,11 @@ export default {
     },
     listCategorias() {
       axios
-        .get("http://localhost:3000/api/categoria/list")
+        .get("http://localhost:3000/api/categoria/list",{
+          headers: {
+            token: this.$store.state.token
+          }
+        })
         .then(response => {
           this.categorias = response.data;
         })
@@ -244,7 +248,11 @@ export default {
         axios
           .put("http://localhost:3000/api/articulo/deactivate", {
             id: this.editedItem.id,
-          })
+          },{
+          headers: {
+            token: this.$store.state.token
+          }
+        })
           .then((response) => {
             this.list();
           })
@@ -255,7 +263,11 @@ export default {
         axios
           .put("http://localhost:3000/api/articulo/activate", {
             id: this.editedItem.id,
-          })
+          },{
+          headers: {
+            token: this.$store.state.token
+          }
+        })
           .then((response) => {
             this.list();
           })
@@ -292,7 +304,11 @@ export default {
             "descripcion": this.editedItem.descripcion,
             "codigo": this.editedItem.codigo,
             "categoria": this.categoria.id,
-          })
+          },{
+          headers: {
+            token: this.$store.state.token
+          }
+        })
           .then((response) => {
             this.list();
           })
@@ -307,7 +323,11 @@ export default {
             "descripcion": this.editedItem.descripcion,
             "codigo": this.editedItem.codigo,
             "categoriaId": this.categoria.id,
-          })
+          },{
+          headers: {
+            token: this.$store.state.token
+          }
+        })
           .then((response) => {
             this.list();
           })
