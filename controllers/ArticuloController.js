@@ -44,7 +44,7 @@ exports.list = async(req, res, next)=>{
 
 exports.update = async(req, res, next) =>{
     try {
-        const registro = await db.Articulo.update({nombre: req.body.nombre, descripcion: req.body.descripcion, codigo: req.body.codigo},
+        const registro = await db.Articulo.update({categoriaId: req.body.categoria, nombre: req.body.nombre, descripcion: req.body.descripcion, codigo: req.body.codigo},
             {
                 where: {
                     id: req.body.id
