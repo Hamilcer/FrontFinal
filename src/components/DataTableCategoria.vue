@@ -191,7 +191,11 @@ export default {
         axios
           .put("http://localhost:3000/api/categoria/deactivate", {
             id: this.editedItem.id,
-          })
+          },{
+          headers: {
+            token: this.$store.state.token
+          }
+        })
           .then((response) => {
             this.list();
           })
@@ -202,7 +206,11 @@ export default {
         axios
           .put("http://localhost:3000/api/categoria/activate", {
             id: this.editedItem.id,
-          })
+          },{
+          headers: {
+            token: this.$store.state.token
+          }
+        })
           .then((response) => {
             this.list();
           })
@@ -236,7 +244,11 @@ export default {
             id: this.editedItem.id,
             nombre: this.editedItem.nombre,
             descripcion: this.editedItem.descripcion,
-          })
+          },{
+          headers: {
+            token: this.$store.state.token
+          }
+        })
           .then((response) => {
             this.list();
           })
@@ -249,7 +261,11 @@ export default {
             estado: 1,
             nombre: this.editedItem.nombre,
             descripcion: this.editedItem.descripcion,
-          })
+          },{
+          headers: {
+            token: this.$store.state.token
+          }
+        })
           .then((response) => {
             this.list();
           })

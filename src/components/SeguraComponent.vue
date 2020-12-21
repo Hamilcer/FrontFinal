@@ -1,79 +1,75 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-card>
+        <v-navigation-drawer
+          permanent
+          expand-on-hover
+        >
+          <v-list class="pt-6" >
+            <v-list-item link>
+              <v-list-item-content>
+                <v-list-item-title class="title">
+                  {{ this.$store.state.user.nombre }}
+                </v-list-item-title>
+                <v-list-item-subtitle> {{this.$store.state.user.email}} </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+  
+          <v-divider></v-divider>
+  
+          <v-list
+            nav
+            dense
+          >
+            <v-list-item link :to="{ name: 'Home' }">
+              <v-list-item-icon>
+                <v-icon>mdi-home</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item>
+            
+            <v-list-item link :to="{ name: 'Categoria' }">
+              <v-list-item-icon>
+                <v-icon>mdi-clipboard-list</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Categorias</v-list-item-title>
+            </v-list-item>
 
-      <v-toolbar-title>Application</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon class="mr-5" @click="salir()">
-        <v-icon>mdi-logout</v-icon>
-        <span>salir</span>
-      </v-btn>
-    </v-app-bar>
+            <v-list-item link :to="{ name: 'Articulo' }">
+              <v-list-item-icon>
+                <v-icon>mdi-clipboard-list-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Articulos</v-list-item-title>
+            </v-list-item>
 
-    <v-navigation-drawer v-model="drawer" fixed temporary>
-      <v-card class="mx-auto" width="300">
-        <v-list>
-          <v-list-item :to="{ name: 'Home' }">
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
+            <v-list-item link :to="{ name: 'Usuario' }">
+              <v-list-item-icon>
+                <v-icon>mdi-account-multiple</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Usuarios</v-list-item-title>
+            </v-list-item>
 
-            <v-list-item-title>Home</v-list-item-title>
+          </v-list>
+          <v-spacer></v-spacer>
+          <template v-slot:append>
+          <v-list-item >
+              <v-list-item-icon>
+                <v-icon>mdi-logout</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>
+              <v-btn block >
+                Logout
+              </v-btn>
+              </v-list-item-title>
           </v-list-item>
+          </template>
 
-          <v-list-group prepend-icon="mdi-account-circle">
-            <template v-slot:activator>
-              <v-list-item-content>
-                <v-list-item-title>Admin</v-list-item-title>
-              </v-list-item-content>
-            </template>
 
-            <v-list-item
-              v-for="([title, icon, ruta], i) in admins"
-              :key="i"
-              :to="{ name: ruta }"
-            >
-              <v-list-item-title v-text="title"></v-list-item-title>
-
-              <v-list-item-icon>
-                <v-icon v-text="icon"></v-icon>
-              </v-list-item-icon>
-            </v-list-item>
-          </v-list-group>
-
-<!--            VALIDAR SEGUN EL ROL          -->
-          <v-list-group v-if="this.$store.state.user.rol === 'Vendedor'"
-          prepend-icon="mdi-account-circle">
-            <template v-slot:activator>
-              <v-list-item-content>
-                <v-list-item-title>Actions</v-list-item-title>
-              </v-list-item-content>
-            </template>
-
-            <v-list-item
-              v-for="([title, icon, ruta], i) in cruds"
-              :key="i"
-              link
-              :to="{ name: ruta }"
-            >
-              <v-list-item-title v-text="title"></v-list-item-title>
-
-              <v-list-item-icon>
-                <v-icon v-text="icon"></v-icon>
-              </v-list-item-icon>
-            </v-list-item>
-          </v-list-group>
-        </v-list>
+        </v-navigation-drawer>
       </v-card>
-    </v-navigation-drawer>
-
-    <v-main class="grey lighten-2">
-      <v-container>
-        <router-view />
-      </v-container>
-    </v-main>
   </v-app>
+
 </template>
 
 <script>
@@ -85,11 +81,6 @@ export default {
   data: () => ({
     //
     drawer: null,
-    admins: [
-      ["Categorias", "mdi-account-multiple-outline", "Categoria"],
-      ["Articulos", "mdi-cog-outline", "Articulo"],
-    ],
-    cruds: [["Usuarios", "mdi-plus-outline", "Usuario"]],
   }),
   created() {
     this.$store.dispatch("autoLogin");
@@ -101,3 +92,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .v-card{
+    height: 100vh;
+  }
+
+</style>
