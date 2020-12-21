@@ -6,7 +6,7 @@
         :items="articulos"
         sort-by="calories"
         :loading="cargando"
-        loading-text="Loading... Please wait"
+        loading-text="Cargando... Por favor espere"
       >
         <template v-slot:top>
           <v-toolbar flat>
@@ -82,23 +82,23 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="close">
-                    Cancel
+                    Cancelar
                   </v-btn>
-                  <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+                  <v-btn color="blue darken-1" text @click="save"> Guardar </v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
-            <v-dialog v-model="dialogDelete" max-width="500px">
+            <v-dialog v-model="dialogChange" max-width="500px">
               <v-card>
                 <v-card-title class="headline"
                   >Seguro quieres cambiar el estado?</v-card-title
                 >
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="closeDelete"
-                    >Cancel</v-btn
+                  <v-btn color="blue darken-1" text @click="closeChange"
+                    >Cancelar</v-btn
                   >
-                  <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                  <v-btn color="blue darken-1" text @click="changeStateConfirm"
                     >OK</v-btn
                   >
                   <v-spacer></v-spacer>
@@ -111,7 +111,7 @@
           <v-icon small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
-          <v-icon medium @click="deleteItem(item)">
+          <v-icon medium @click="changeState(item)">
             <template v-if="item.estado"> mdi-toggle-switch </template>
             <template v-else> mdi-toggle-switch-off-outline </template>
           </v-icon>
@@ -130,7 +130,7 @@ import axios from "axios";
 export default {
   data: () => ({
     dialog: false,
-    dialogDelete: false,
+    dialogChange: false,
     cargando: true,
     headers: [
       { text: "ID", value: "id" },
@@ -184,8 +184,8 @@ export default {
     dialog(val) {
       val || this.close();
     },
-    dialogDelete(val) {
-      val || this.closeDelete();
+    dialogChange(val) {
+      val || this.closeChange();
     },
   },
 
@@ -228,13 +228,13 @@ export default {
       this.dialog = true;
     },
 
-    deleteItem(item) {
+    changeState(item) {
       this.editedIndex = item.id
       this.editedItem = Object.assign({}, item);
-      this.dialogDelete = true;
+      this.dialogChange = true;
     },
 
-    deleteItemConfirm() {
+    changeStateConfirm() {
       if (this.editedItem.estado === 1) {
         axios
           .put("http://localhost:3000/api/articulo/deactivate", {
@@ -266,7 +266,7 @@ export default {
             return error;
           });
       }
-      this.closeDelete();
+      this.closeChange();
     },
 
     close() {
@@ -278,8 +278,8 @@ export default {
       });
     },
 
-    closeDelete() {
-      this.dialogDelete = false;
+    closeChange() {
+      this.dialogChange = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;

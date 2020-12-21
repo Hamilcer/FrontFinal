@@ -23,6 +23,7 @@
                     required
                     ></v-text-field>
 
+                    <!-- habilito el boton de login si los campos estan llenos -->
                     <v-btn
                     :disabled="!(this.login.password && this.login.email)"
                     color="success"
@@ -56,9 +57,9 @@ export default {
             }
         }
     },
-    
+    // envio al usuario a /autenticado/categoria, si hay un token
     beforeCreate(){
-        this.$store.dispatch('autoLogin')? this.$router.push({path: '/segura/categoria'}) : false;
+        this.$store.dispatch('autoLogin')? this.$router.push({path: '/autenticado/categoria'}) : false;
   },
     methods:{
         loginUser(){
@@ -66,9 +67,10 @@ export default {
             .then(response=>{
                 return response.data;
             })
+            // si el usuario es correcto guardo el token y envio al usuario a /autenticado/categoria, si no disparo una alerta de error
             .then(data =>{
                 this.$store.dispatch('guardarToken', data.tokenReturn)
-                this.$router.push({path: '/segura/categoria'});
+                this.$router.push({path: '/autenticado/categoria'});
                 swal ("Éxito!!",'Login correcto, beinvenido!',"success");
                 console.log(data);
             })
