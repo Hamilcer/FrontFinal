@@ -58,7 +58,7 @@ export default {
     },
     
     beforeCreate(){
-        this.$store.dispatch('autoLogin')? this.$router.push({path: '/segura'}) : false;
+        this.$store.dispatch('autoLogin')? this.$router.push({path: '/segura/categoria'}) : false;
   },
     methods:{
         loginUser(){
@@ -68,7 +68,7 @@ export default {
             })
             .then(data =>{
                 this.$store.dispatch('guardarToken', data.tokenReturn)
-                this.$router.push({name: 'Segura'});
+                this.$router.push({path: '/segura/categoria'});
                 swal ("Éxito!!",'Login correcto, beinvenido!',"success");
                 console.log(data);
             })

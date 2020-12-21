@@ -5,13 +5,12 @@
         :headers="headers"
         :items="usuarios"
         sort-by="calories"
-        class="elevation-1"
         :loading="cargando"
         loading-text="Loading... Please wait"
       >
         <template v-slot:top>
           <v-toolbar flat>
-            <v-toolbar-title>Categorias</v-toolbar-title>
+            <v-toolbar-title>Usuarios</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
@@ -84,7 +83,7 @@
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
                 <v-card-title class="headline"
-                  >Are you sure you want to change this this state?</v-card-title
+                  >Seguro quieres cambiar el estado?</v-card-title
                 >
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -114,9 +113,7 @@
         </template>
       </v-data-table>
     </v-app>
-    <pre>
-        {{ $data.usuarios }}
-    </pre>
+
   </div>
 </template>
 
@@ -137,7 +134,7 @@ export default {
       },
       { text: "Correo", value: "email" },
       { text: "Eestado", value: "estado" },
-      { text: "Actions", value: "actions", sortable: false },
+      { text: "Editar", value: "actions", sortable: false },
     ],
     usuarios: [],
     categorias: [],
@@ -280,3 +277,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .v-data-table {
+    box-shadow:rgba(0, 0, 0, .2) 0px 0px 6px 6px;
+    
+  }
+</style>

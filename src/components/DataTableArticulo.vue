@@ -5,7 +5,6 @@
         :headers="headers"
         :items="articulos"
         sort-by="calories"
-        class="elevation-1"
         :loading="cargando"
         loading-text="Loading... Please wait"
       >
@@ -23,7 +22,7 @@
                   v-bind="attrs"
                   v-on="on"
                 >
-                  Agregar Articulos
+                  Agregar Articulo
                 </v-btn>
               </template>
               <v-card>
@@ -98,7 +97,7 @@
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
                 <v-card-title class="headline"
-                  >Are you sure you want to delete this item?</v-card-title
+                  >Seguro quieres cambiar el estado?</v-card-title
                 >
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -128,9 +127,7 @@
         </template>
       </v-data-table>
     </v-app>
-    <pre>
-        {{ $data.articulos }}
-    </pre>
+
   </div>
 </template>
 
@@ -153,7 +150,7 @@ export default {
       { text: "Categoria", value: "categoria.nombre" },
       { text: "Codigo", value: "codigo" },
       { text: "Estado", value: "estado" },
-      { text: "Actions", value: "actions", sortable: false },
+      { text: "Editar", value: "actions", sortable: false },
     ],
     articulos: [],
     categorias: [],
@@ -340,3 +337,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .v-data-table {
+    box-shadow:rgba(0, 0, 0, .2) 0px 0px 6px 6px;
+    
+  }
+</style>

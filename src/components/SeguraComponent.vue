@@ -1,8 +1,10 @@
 <template>
   <v-app id="inspire">
-      <v-card>
+     
         <v-navigation-drawer
-          permanent
+        
+          color="BLACK"
+          dark
           expand-on-hover
         >
           <v-list class="pt-6" >
@@ -15,6 +17,14 @@
               </v-list-item-content>
             </v-list-item>
           </v-list>
+            <v-list-item link color="white" :to="{ name: 'Home' }">
+              <v-list-item-icon>
+                <v-icon>mdi-home</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item>
+
+            <br>
   
           <v-divider></v-divider>
   
@@ -22,12 +32,6 @@
             nav
             dense
           >
-            <v-list-item link :to="{ name: 'Home' }">
-              <v-list-item-icon>
-                <v-icon>mdi-home</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>Home</v-list-item-title>
-            </v-list-item>
             
             <v-list-item link :to="{ name: 'Categoria' }">
               <v-list-item-icon>
@@ -55,10 +59,10 @@
           <template v-slot:append>
           <v-list-item >
               <v-list-item-icon>
-                <v-icon>mdi-logout</v-icon>
+                <v-icon >mdi-logout</v-icon>
               </v-list-item-icon>
               <v-list-item-title>
-              <v-btn block >
+              <v-btn block color="accent" @click="salir()">
                 Logout
               </v-btn>
               </v-list-item-title>
@@ -67,7 +71,12 @@
 
 
         </v-navigation-drawer>
-      </v-card>
+      <v-container class="pt-12">
+        <div class="hola"></div>
+        <!-- <img src="https://raw.githubusercontent.com/Hamilcer/nothing/main/background3.png" alt="" class="background"> -->
+        <router-view />
+      </v-container>
+      
   </v-app>
 
 </template>
@@ -94,8 +103,27 @@ export default {
 </script>
 
 <style scoped>
-  .v-card{
+  .v-navigation-drawer{
     height: 100vh;
+    position: fixed;
+    z-index: 2;
+  }
+  /* .background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  } */
+  .hola {
+    background-image: url("https://github.com/Hamilcer/nothing/blob/main/background4.png?raw=true");
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    top: 0;
+    filter: blur(1px);
+    background-size: cover;
   }
 
 </style>
