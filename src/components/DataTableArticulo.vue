@@ -39,7 +39,7 @@
                           v-model="editedItem.id"
                           label="ID"
                         ></v-text-field>
-                      </v-col>
+                      </v-col> 
 
                       <v-col cols="12">
                         <v-text-field
@@ -74,13 +74,7 @@
                           label="Codigo"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          v-model="editedItem.categoria.estado"
-                          label="Estado"
-                        ></v-text-field>
-                      </v-col>
-
+          
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -182,7 +176,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "Nueva articulo" : "Editar articulo";
     },
   },
 

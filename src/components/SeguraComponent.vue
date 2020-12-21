@@ -2,8 +2,8 @@
   <v-app id="inspire">
      
         <v-navigation-drawer
-        
-          color="BLACK"
+          src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+          color="blue"
           dark
           expand-on-hover
         >
@@ -13,6 +13,7 @@
                 <v-list-item-title class="title">
                   {{ this.$store.state.user.nombre }}
                 </v-list-item-title>
+                <v-list-item-subtitle> {{this.$store.state.user.rol}} </v-list-item-subtitle>
                 <v-list-item-subtitle> {{this.$store.state.user.email}} </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>

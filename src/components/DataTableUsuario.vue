@@ -55,14 +55,6 @@
                         ></v-text-field>
                       </v-col>
 
-
-
-                      <v-col cols="12">
-                        <v-text-field
-                          v-model="editedItem.estado"
-                          label="Estado"
-                        ></v-text-field>
-                      </v-col>
             
  
 
@@ -155,7 +147,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "Nueva usuario" : "Editar usuario";
     },
   },
 
