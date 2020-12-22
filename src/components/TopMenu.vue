@@ -19,13 +19,13 @@
           <a class="nav-link" href="Login">Inicio de sesión</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#platoprincipal">Plato principal</a>
+          <a class="nav-link" href="#platofuerte">Plato principal</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#postres">Postres</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#bebidas">Bebidas</a>
+          <a class="nav-link" href="#bebida">Bebidas</a>
         </li>
       </ul>
     </div>

@@ -73,8 +73,9 @@ export default {
         }
     },
     
+    // envio al usuario a /autenticado/categoria, si hay un token
     beforeCreate(){
-        this.$store.dispatch('autoLogin')? this.$router.push({path: '/segura'}) : false;
+        this.$store.dispatch('autoLogin')? this.$router.push({path: '/autenticado/categoria'}) : false;
   },
     methods:{
         loginUser(){
@@ -82,9 +83,10 @@ export default {
             .then(response=>{
                 return response.data;
             })
+            // si el usuario es correcto guardo el token y envio al usuario a /autenticado/categoria, si no disparo una alerta de error
             .then(data =>{
                 this.$store.dispatch('guardarToken', data.tokenReturn)
-                this.$router.push({name: 'Segura'});
+                this.$router.push({path: '/autenticado/categoria'});
                 swal ("Éxito!!",'Login correcto, beinvenido!',"success");
                 console.log(data);
             })

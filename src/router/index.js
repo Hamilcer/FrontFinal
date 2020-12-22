@@ -34,12 +34,12 @@ const routes = [
     }
   },
   {
-    path: '/segura',
-    name: 'Segura',
+    path: '/autenticado',
+    name: 'Autenticado',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "segura" */ '../views/Segura.vue'),
+    component: () => import(/* webpackChunkName: "autenticado" */ '../views/Autenticado.vue'),
     meta:{
       auth: true
     },

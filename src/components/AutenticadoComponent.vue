@@ -48,7 +48,7 @@
               <v-list-item-title>Articulos</v-list-item-title>
             </v-list-item>
 
-            <v-list-item link :to="{ name: 'Usuario' }">
+            <v-list-item link :to="{ name: 'Usuario' }" v-if="this.$store.state.user.rol === 'Administrador'">
               <v-list-item-icon>
                 <v-icon>mdi-account-multiple</v-icon>
               </v-list-item-icon>
@@ -74,7 +74,6 @@
         </v-navigation-drawer>
       <v-container class="pt-12">
         <div class="hola"></div>
-        <!-- <img src="https://raw.githubusercontent.com/Hamilcer/nothing/main/background3.png" alt="" class="background"> -->
         <router-view />
       </v-container>
       
@@ -109,13 +108,6 @@ export default {
     position: fixed;
     z-index: 2;
   }
-  /* .background {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-  } */
   .hola {
     background-image: url("https://github.com/Hamilcer/nothing/blob/main/background4.png?raw=true");
     height: 100vh;
